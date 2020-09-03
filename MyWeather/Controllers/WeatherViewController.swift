@@ -29,8 +29,13 @@ class WeatherViewController: UIViewController {
         locationButton.tintColor = .white
         
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.requestLocation()
+        }
+        
         weatherManager.delegate = self
         searchTextField.delegate = self
     }
@@ -44,6 +49,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension WeatherViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
@@ -73,6 +79,7 @@ extension WeatherViewController: UITextFieldDelegate{
     }
 }
 
+//MARK: - WeatherManagerDelegate
 extension WeatherViewController: WeatherManagerDelegate{
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
@@ -84,22 +91,22 @@ extension WeatherViewController: WeatherManagerDelegate{
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        print(error.localizedDescription)
     }
 }
 
+//MARK: - CLLocationManagerDelegate
 extension WeatherViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last{
-            locationManager.stopUpdatingLocation()
+        guard let location = locations.last else { return }
+            //locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
             weatherManager.fetchWeather(latitude: lat, longitude: lon)
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        print(error.localizedDescription)
     }
 }

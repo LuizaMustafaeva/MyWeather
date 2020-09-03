@@ -16,7 +16,6 @@
 		2569335724FFC149003B8C89 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569335624FFC149003B8C89 /* WeatherManager.swift */; };
 		2569335924FFC87E003B8C89 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569335824FFC87E003B8C89 /* WeatherData.swift */; };
 		256941CC250030DD0032B19E /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256941CB250030DD0032B19E /* WeatherModel.swift */; };
-		2574BD0D2500C4E400AC8ECA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2574BD0C2500C4E300AC8ECA /* Default-568h@2x.png */; };
 		2574BD0F2500CAA400AC8ECA /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2574BD0E2500CAA400AC8ECA /* Constans.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		2569335624FFC149003B8C89 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		2569335824FFC87E003B8C89 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		256941CB250030DD0032B19E /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
-		2574BD0C2500C4E300AC8ECA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2574BD0E2500CAA400AC8ECA /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,7 +48,6 @@
 		2569333324FFA88A003B8C89 = {
 			isa = PBXGroup;
 			children = (
-				2574BD0C2500C4E300AC8ECA /* Default-568h@2x.png */,
 				2569333E24FFA88A003B8C89 /* MyWeather */,
 				2569333D24FFA88A003B8C89 /* Products */,
 			);
@@ -173,7 +170,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2569334C24FFA88A003B8C89 /* LaunchScreen.storyboard in Resources */,
-				2574BD0D2500C4E400AC8ECA /* Default-568h@2x.png in Resources */,
 				2569334924FFA88A003B8C89 /* Assets.xcassets in Resources */,
 				2569334724FFA88A003B8C89 /* Main.storyboard in Resources */,
 			);
