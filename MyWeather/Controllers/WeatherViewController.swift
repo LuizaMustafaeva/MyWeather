@@ -28,17 +28,19 @@ class WeatherViewController: UIViewController {
         searchButton.tintColor = .white
         locationButton.tintColor = .white
         
-        weatherManager.delegate = self
-        
-        searchTextField.delegate = self
-        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        weatherManager.delegate = self
+        searchTextField.delegate = self
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
         searchTextField.endEditing(true)
+    }
+    
+    @IBAction func locationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
     }
 }
 
@@ -50,8 +52,13 @@ extension WeatherViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let city = searchTextField.text{
-            weatherManager.fetchWeather(cityName : city)
+        if let cityName = searchTextField.text{
+            if cityName != ""{
+                let city = cityName.split(separator: " ").joined(separator: "%20")
+                print(city)
+                weatherManager.fetchWeather(cityName : city)
+            }
+            
         }
         searchTextField.text = ""
     }
@@ -69,9 +76,10 @@ extension WeatherViewController: UITextFieldDelegate{
 extension WeatherViewController: WeatherManagerDelegate{
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
-            self.temperatureLabel.text = weather.temperatureString
+            self.temperatureLabel.text = ("\(weather.temperatureString)°C")
+            self.feelsLikeTemperatureLabel.text = ("\(weather.feelsLikeTemperatureString)°C")
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
-            //self.cityLabel.text = weather.cityName
+            self.cityNameLabel.text = weather.cityName
         }
     }
     
@@ -83,8 +91,11 @@ extension WeatherViewController: WeatherManagerDelegate{
 extension WeatherViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last{
+            locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
-            let lan = location.coordinate.longitude
+            let lon = location.coordinate.longitude
+            
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
         }
     }
     
